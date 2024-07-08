@@ -23,3 +23,11 @@
 body {
   background: linear-gradient(to right, var(--dark-purple), var(--primary-purple));
 }
+
+.evolve-gradient-btn{
+  background: linear-gradient(to right, var(--primary-pink), var(--primary-purple), var(--light-purple));
+}
+
+.puto{
+  grid-template-columns: repeat(3, auto) !important;
+}
