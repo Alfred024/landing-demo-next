@@ -5,9 +5,9 @@
 *{
   margin: 0;
   padding: 0;
-  color: white;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+  color: white;
 }
 :root{
   --black-purple: #060512;
