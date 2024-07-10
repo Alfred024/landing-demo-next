@@ -1,22 +1,22 @@
 import Image from "next/image";
 
-interface ServiceCardProps{
-    service : string;
-    serviceIcon : string;
+interface ProductCardProps{
+    product : string;
+    productIcon : string;
     content? : string;
 }
 
-export const ServiceCard = ( cardProps : ServiceCardProps ) =>{
+export const ProductCard = ( cardProps : ProductCardProps ) =>{
     return(
         <div className="flex-col justify-center border-none rounded-3xl p-5 bg-slate-900">
              <Image 
                 width={50}
                 height={50}
-                src={cardProps.serviceIcon} 
+                src={cardProps.productIcon} 
                 alt={'ICON'} 
                 loading="eager" />
 
-            <h2>{cardProps.service}</h2>
+            <h2>{cardProps.product}</h2>
 
             {cardProps.content ?? <p>cardProps.content</p> }
         </div>

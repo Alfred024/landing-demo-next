@@ -22,12 +22,13 @@ export async function getProductsCollections() {
         );
         const { smart_collections } = await response.json();
 
-        let collections : {'id': string, 'title': string}[] = [];
+        let collections : {'id': string, 'title': string, 'handle': string}[] = [];
         
         smart_collections.map(( collection : any )=>{
             collections.push({
                 'id': collection.id,
-                'title': collection.title
+                'title': collection.title,
+                'handle': collection.handle,
             });
         });
         return collections;
