@@ -15,7 +15,7 @@ export async function getProducts() {
     }
 }
 
-export async function getProductById( id : string ){
+export async function getProductById( id : string ) {
     try {
         const response = await fetch(
             `${shopifyUrls.allProducts}?ids=${id}`,
