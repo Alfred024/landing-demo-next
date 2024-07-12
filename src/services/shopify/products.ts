@@ -8,9 +8,24 @@ export async function getProducts() {
             {headers: new Headers({ 'X-Shopify-Access-Token': envs.SHOPIFY_STORE_APIKEY || "" })}
         );
         const { products } = await response.json();
-        return products;
+        let productsTranformed = transformProducts(products);
+        return productsTranformed;
     } catch (error) {
-        throw Error('Error fetching the products');        
+        console.log('Error fetching the products');
+    }
+}
+
+export async function getProductById( id : string ){
+    try {
+        const response = await fetch(
+            `${shopifyUrls.allProducts}?ids=${id}`,
+            {headers: new Headers({ 'X-Shopify-Access-Token': envs.SHOPIFY_STORE_APIKEY || "" })}
+        );
+        const { products } = await response.json();
+        let productTranformed = transformProducts(products);
+        return productTranformed;
+    } catch (error) {
+        console.log('Error fetching the products');
     }
 }
 
@@ -33,7 +48,7 @@ export async function getProductsCollections() {
         });
         return collections;
     } catch (error) {
-        throw Error('Error fetching the collections');       
+        console.log('Error fetching the collections');      
     }
 }
 
@@ -43,10 +58,27 @@ export async function getProductsByCollectionId( collectionId : string ){
             shopifyUrls.collections.single(collectionId),
             {headers: new Headers({ 'X-Shopify-Access-Token': envs.SHOPIFY_STORE_APIKEY || "" })}
         );
-
         const { products } = await response.json();
-        return products;
+        let productsTranformed = transformProducts(products);
+        return productsTranformed;
     } catch (error) {
-        throw Error('Error fetching the collection');       
+        console.log('Error fetching the collection');
     }    
+}
+
+function transformProducts( products : [] ) {
+    let productsTranformed : ProductType[] = [];
+    products.map((productItem : any) =>{
+        productsTranformed.push({
+                id : productItem.id,
+                title : productItem.title,
+                description : productItem.body_html,
+                price: productItem.price,
+                image: productItem.image,
+                quantity: productItem.quantity,
+                handle: productItem.handle,
+                tags: productItem.tags,
+        });
+    });
+    return productsTranformed;                  
 }
