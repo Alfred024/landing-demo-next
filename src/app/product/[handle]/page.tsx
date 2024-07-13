@@ -1,4 +1,7 @@
+// "use client"
+
 import { getProductById } from "app/services/shopify/products"
+import { redirect } from "next/navigation";
 import Image from "next/image";
 
 interface ProductPageProps{
@@ -8,6 +11,16 @@ interface ProductPageProps{
 }
 
 export default async function ProductPage( {searchParams} : ProductPageProps ) {
+    
+    // REDIRECT LADO DEL CLIENTE
+    // const router = useRouter();
+    // if(!searchParams.id){
+    //   router.push('/');
+    // }
+
+    // REDIRECT LADO DEL SERVIDOR
+    if(!searchParams.id) redirect('/');
+
     let product = await getProductById(searchParams.id);
 
     return (

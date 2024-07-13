@@ -1,11 +1,22 @@
 import { envs } from "app/config/env";
 import { shopifyUrls } from "./url";
+// import next from "next";
+
+// MANEJO DE CACHÉ DENTRO DEL "fetch"
 
 export async function getProducts() {
     try {
         const response = await fetch(
             shopifyUrls.allProducts,
-            {headers: new Headers({ 'X-Shopify-Access-Token': envs.SHOPIFY_STORE_APIKEY || "" })}
+            {
+                headers: new Headers({ 'X-Shopify-Access-Token': envs.SHOPIFY_STORE_APIKEY || "" }),
+                // quit cache
+                // cache: 'no-cache'
+                // cache based on time
+                // next: {
+                //     revalidate: 3600 
+                // }
+            },
         );
         const { products } = await response.json();
         let productsTranformed = transformProducts(products);
